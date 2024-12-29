@@ -1,10 +1,10 @@
 import * as lib from "three";
 
-export type Three = typeof lib;
+export type ThreeModule = typeof lib;
 
 declare global {
-  const THREE: Three;
+  const THREE: ThreeModule;
   interface Window {
-    THREE: Three;
+    THREE: ThreeModule;
   }
 }
