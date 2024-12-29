@@ -1,6 +1,22 @@
-import { initThree } from "./three";
+import { initializeThree } from "./three";
+import { createScene } from "./scene";
+import { createCamera } from "./camera";
+import { createRenderer } from "./renderer";
+import { createFigure } from "./figure";
+import { getContainer, setupContainer } from "./container";
 
 export const init = async () => {
-  const THREE = await initThree();
-  console.log("THREE", THREE);
+  await initializeThree();
+
+  const container = getContainer();
+  const scene = createScene();
+  const camera = createCamera();
+  const renderer = createRenderer();
+
+  setupContainer(container, renderer);
+
+  const figure = createFigure();
+  scene.add(figure);
+
+  renderer.render(scene, camera);
 };

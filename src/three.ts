@@ -27,5 +27,5 @@ class Three {
   }
 }
 
-export const initThree = Three.initialize;
+export const initializeThree = Three.initialize;
 export const getThree = Three.getThree;
