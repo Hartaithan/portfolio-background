@@ -1,7 +1,7 @@
 import { initializeThree } from "./three";
 import { createScene } from "./scene";
 import { createCamera } from "./camera";
-import { createRenderer } from "./renderer";
+import { createRenderer, handleResize } from "./renderer";
 import { createFigure } from "./figure";
 import { getContainer, setupContainer } from "./container";
 
@@ -17,6 +17,9 @@ export const init = async () => {
 
   const figure = createFigure();
   scene.add(figure);
+
+  window.addEventListener("resize", () => handleResize(camera, renderer));
+  handleResize(camera, renderer);
 
   const clock = new THREE.Clock();
 
