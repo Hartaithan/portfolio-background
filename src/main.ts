@@ -3,7 +3,7 @@ import { createScene } from "./scene";
 import { createCamera } from "./camera";
 import { createRenderer, handleResize } from "./renderer";
 import { createFigure } from "./figure";
-import { getContainer, setupContainer } from "./container";
+import { getContainer } from "./container";
 
 export const init = async () => {
   const THREE = await initializeThree();
@@ -13,7 +13,7 @@ export const init = async () => {
   const camera = createCamera();
   const renderer = createRenderer();
 
-  setupContainer(container, renderer);
+  container.appendChild(renderer.domElement);
 
   const figure = createFigure();
   scene.add(figure);
