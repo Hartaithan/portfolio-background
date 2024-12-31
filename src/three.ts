@@ -4,28 +4,40 @@ import type { ThreeModule } from "./types";
 const version = "0.171.0";
 const THREE_CDN = `https://cdn.jsdelivr.net/npm/three@${version}/build/three.module.js`;
 
-class Three {
+const messages = {
+  initializing: "three is currently being initialized. please wait...",
+  initializeError: "unable to load three",
+  notInitialized: "three is not initialized",
+};
+
+export class Three {
   private static instance: ThreeModule | null = null;
+  private static initializing: boolean = false;
+
   private constructor() {}
 
   public static async initialize(): Promise<ThreeModule> {
-    if (window.THREE !== undefined) return window.THREE;
+    if (Three.instance) return Three.instance;
+    if (Three.initializing) throw new Error(messages.initializing);
+    if (window.THREE !== undefined) {
+      Three.instance = window.THREE;
+      return Three.instance;
+    }
+    Three.initializing = true;
     try {
-      const THREE = (await import(/* @vite-ignore */ THREE_CDN)) as ThreeModule;
-      window.THREE = THREE;
-      Three.instance = THREE;
-      return THREE;
+      const THREE = await import(/* @vite-ignore */ THREE_CDN);
+      Three.instance = THREE as ThreeModule;
+      return Three.instance;
     } catch (error) {
-      console.error("unable to load three", error);
+      console.error(messages.initializeError, error);
       throw error;
+    } finally {
+      Three.initializing = false;
     }
   }
 
-  public static getThree(): ThreeModule {
-    if (!Three.instance) throw new Error("three is not initialized");
+  public static get(): ThreeModule {
+    if (!Three.instance) throw new Error(messages.notInitialized);
     return Three.instance;
   }
 }
-
-export const initializeThree = Three.initialize;
-export const getThree = Three.getThree;

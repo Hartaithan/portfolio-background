@@ -1,6 +1,6 @@
-import { getThree } from "./three";
+import { Three } from "./three";
 
 export const createScene = () => {
-  const THREE = getThree();
+  const THREE = Three.get();
   return new THREE.Scene();
 };

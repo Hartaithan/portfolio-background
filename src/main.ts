@@ -1,4 +1,4 @@
-import { initializeThree } from "./three";
+import { Three } from "./three";
 import { createScene } from "./scene";
 import { createCamera } from "./camera";
 import { createRenderer, handleResize } from "./renderer";
@@ -6,7 +6,7 @@ import { createFigure } from "./figure";
 import { getContainer } from "./container";
 
 export const init = async () => {
-  const THREE = await initializeThree();
+  const THREE = await Three.initialize();
 
   const container = getContainer();
   const scene = createScene();
