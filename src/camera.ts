@@ -1,5 +1,6 @@
 import { PerspectiveCamera } from "three";
 import { Three } from "./three";
+import { Figure } from "./figure";
 
 export class Camera {
   private static camera: PerspectiveCamera;
@@ -8,9 +9,11 @@ export class Camera {
 
   public static create() {
     const THREE = Three.get();
+    const zoom = Figure.getZoom();
     const aspect = window.innerWidth / window.innerHeight;
-    const camera = new THREE.PerspectiveCamera(75, aspect, 0.1, 1000);
+    const camera = new THREE.PerspectiveCamera(50, aspect, 1, 10);
     camera.position.z = 6;
+    camera.zoom = zoom;
     Camera.camera = camera;
     return Camera.camera;
   }

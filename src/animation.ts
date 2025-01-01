@@ -9,6 +9,7 @@ export const initializeAnimation = () => {
   const clock = new THREE.Clock();
 
   const figure = Figure.get();
+  const rotation = Figure.getRotation();
   const renderer = Renderer.get();
   const scene = Scene.get();
   const camera = Camera.get();
@@ -16,7 +17,7 @@ export const initializeAnimation = () => {
   const animate = () => {
     requestAnimationFrame(animate);
     const elapsed = clock.getElapsedTime();
-    figure.rotation.y += 0.003;
+    figure.rotation.y += rotation;
     figure.position.y = Math.sin(elapsed) * 0.1;
     renderer.render(scene, camera);
   };

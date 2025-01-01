@@ -8,6 +8,7 @@ import { initializeAnimation } from "./animation";
 
 export const init = async () => {
   await Three.initialize();
+  Figure.pick();
   Scene.create();
   Camera.create();
   Renderer.create();
