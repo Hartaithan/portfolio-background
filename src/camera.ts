@@ -10,7 +10,7 @@ export class Camera {
     const THREE = Three.get();
     const aspect = window.innerWidth / window.innerHeight;
     const camera = new THREE.PerspectiveCamera(75, aspect, 0.1, 1000);
-    camera.position.z = 5;
+    camera.position.z = 6;
     Camera.camera = camera;
     return Camera.camera;
   }
