@@ -12,6 +12,7 @@ export class Renderer {
     const THREE = Three.get();
     const renderer = new THREE.WebGLRenderer({ alpha: true });
     renderer.setSize(window.innerWidth, window.innerHeight);
+    renderer.setPixelRatio(window.devicePixelRatio);
     Renderer.renderer = renderer;
     return Renderer.renderer;
   }
