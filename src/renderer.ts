@@ -1,6 +1,7 @@
 import { WebGLRenderer } from "three";
 import { Three } from "./three";
 import { Camera } from "./camera";
+import { Figure } from "./figure";
 
 export class Renderer {
   private static renderer: WebGLRenderer;
@@ -20,10 +21,13 @@ export class Renderer {
   }
 
   private static handleResize() {
+    const { innerWidth, innerHeight } = window;
     const camera = Camera.get();
-    camera.aspect = window.innerWidth / window.innerHeight;
+    const changedZoom = innerWidth && innerWidth < 1000 ? Figure.getZoom() : 1;
+    camera.zoom += (changedZoom - camera.zoom) * 0.1;
+    camera.aspect = innerWidth / innerHeight;
     camera.updateProjectionMatrix();
-    Renderer.renderer.setSize(window.innerWidth, window.innerHeight);
+    Renderer.renderer.setSize(innerWidth, innerHeight);
   }
 
   public static listenOnResize() {
