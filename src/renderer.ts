@@ -1,5 +1,4 @@
 import { WebGLRenderer } from "three";
-import { Three } from "./three";
 import { Camera } from "./camera";
 import { Figure } from "./figure";
 
@@ -9,8 +8,7 @@ export class Renderer {
   constructor() {}
 
   public static create() {
-    const THREE = Three.get();
-    const renderer = new THREE.WebGLRenderer({ alpha: true });
+    const renderer = new WebGLRenderer({ alpha: true });
     renderer.setSize(window.innerWidth, window.innerHeight);
     renderer.setPixelRatio(window.devicePixelRatio);
     Renderer.renderer = renderer;

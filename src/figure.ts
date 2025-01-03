@@ -1,8 +1,17 @@
-import { Mesh, MeshStandardMaterialParameters } from "three";
-import { Three } from "./three";
+import {
+  BoxGeometry,
+  IcosahedronGeometry,
+  Mesh,
+  MeshBasicMaterial,
+  MeshStandardMaterialParameters,
+  OctahedronGeometry,
+  SphereGeometry,
+  TetrahedronGeometry,
+  TorusGeometry,
+  TorusKnotGeometry,
+} from "three";
 import { Scene } from "./scene";
 import { getRandomNumber } from "./utils";
-import { ThreeModule as TJS } from "./types";
 
 const materialParameters: MeshStandardMaterialParameters = {
   color: "#ffffff",
@@ -13,43 +22,43 @@ const materialParameters: MeshStandardMaterialParameters = {
 
 const figures = [
   {
-    constructor: (T: TJS) => new T.BoxGeometry(1, 1, 1),
+    constructor: () => new BoxGeometry(1, 1, 1),
     scale: 2,
     zoom: 0.7,
     rotation: 0.003,
   },
   {
-    constructor: (T: TJS) => new T.IcosahedronGeometry(1, 1),
+    constructor: () => new IcosahedronGeometry(1, 1),
     scale: 1.5,
     zoom: 0.7,
     rotation: 0.002,
   },
   {
-    constructor: (T: TJS) => new T.OctahedronGeometry(1, 0),
+    constructor: () => new OctahedronGeometry(1, 0),
     scale: 1.5,
     zoom: 0.7,
     rotation: 0.006,
   },
   {
-    constructor: (T: TJS) => new T.TorusKnotGeometry(1, 0.1, 160, 10, 3, 5),
+    constructor: () => new TorusKnotGeometry(1, 0.1, 160, 10, 3, 5),
     scale: 1,
     zoom: 0.65,
     rotation: 0.005,
   },
   {
-    constructor: (T: TJS) => new T.SphereGeometry(1, 8, 8),
+    constructor: () => new SphereGeometry(1, 8, 8),
     scale: 1.5,
     zoom: 0.7,
     rotation: 0.0025,
   },
   {
-    constructor: (T: TJS) => new T.TetrahedronGeometry(1, 0),
+    constructor: () => new TetrahedronGeometry(1, 0),
     scale: 2,
     zoom: 0.6,
     rotation: 0.005,
   },
   {
-    constructor: (T: TJS) => new T.TorusGeometry(25, 8, 4, 4),
+    constructor: () => new TorusGeometry(25, 8, 4, 4),
     scale: 0.047,
     zoom: 0.65,
     rotation: 0.005,
@@ -75,11 +84,10 @@ export class Figure {
   }
 
   public static initialize() {
-    const THREE = Three.get();
     const { constructor } = figures[Figure.index];
-    const geometry = constructor(THREE);
-    const material = new THREE.MeshBasicMaterial(materialParameters);
-    const figure = new THREE.Mesh(geometry, material);
+    const geometry = constructor();
+    const material = new MeshBasicMaterial(materialParameters);
+    const figure = new Mesh(geometry, material);
     figure.scale.set(Figure.scale, Figure.scale, Figure.scale);
     const scene = Scene.get();
     scene.add(figure);

@@ -1,5 +1,4 @@
 import { Scene as ThreeScene } from "three";
-import { Three } from "./three";
 
 export class Scene {
   private static scene: ThreeScene;
@@ -7,8 +6,7 @@ export class Scene {
   constructor() {}
 
   public static create() {
-    const THREE = Three.get();
-    Scene.scene = new THREE.Scene();
+    Scene.scene = new ThreeScene();
     return Scene.scene;
   }
 

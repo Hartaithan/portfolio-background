@@ -1,4 +1,3 @@
-import { Three } from "./three";
 import { Figure } from "./figure";
 import { Container } from "./container";
 import { Scene } from "./scene";
@@ -7,7 +6,6 @@ import { Renderer } from "./renderer";
 import { initializeAnimation } from "./animation";
 
 export const init = async () => {
-  await Three.initialize();
   Figure.pick();
   Scene.create();
   Camera.create();

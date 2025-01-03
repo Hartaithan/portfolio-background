@@ -1,12 +1,11 @@
+import { Clock } from "three";
 import { Camera } from "./camera";
 import { Figure } from "./figure";
 import { Renderer } from "./renderer";
 import { Scene } from "./scene";
-import { Three } from "./three";
 
 export const initializeAnimation = () => {
-  const THREE = Three.get();
-  const clock = new THREE.Clock();
+  const clock = new Clock();
 
   const figure = Figure.get();
   const rotation = Figure.getRotation();
