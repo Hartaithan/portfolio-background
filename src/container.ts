@@ -17,6 +17,19 @@ export class Container {
     return container;
   }
 
+  public static injectStyles() {
+    const style = document.createElement("style");
+    style.textContent = `
+      #background {
+        height: 100%;
+        width: 100%;
+        opacity: 0;
+        transition: opacity 1s ease-in-out;
+      }
+    `;
+    document.head.appendChild(style);
+  }
+
   public static setup() {
     const container = Container.get();
     const renderer = Renderer.get();

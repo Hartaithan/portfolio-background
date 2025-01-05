@@ -7,6 +7,7 @@ import { initializeAnimation } from "./animation";
 import { Font } from "./font";
 
 export const init = async () => {
+  Container.injectStyles();
   Figure.pick();
   await Font.load();
   Scene.create();
