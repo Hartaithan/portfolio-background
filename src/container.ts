@@ -26,13 +26,22 @@ export class Container {
         opacity: 0;
         transition: opacity 1s ease-in-out;
       }
+      #background.visible {
+        opacity: 1;
+      }
     `;
     document.head.appendChild(style);
+  }
+
+  public static show() {
+    const container = Container.get();
+    container.classList.add("visible");
   }
 
   public static setup() {
     const container = Container.get();
     const renderer = Renderer.get();
+    // TODO: fix cannot read properties of undefined (reading 'domElement')
     container.appendChild(renderer.domElement);
   }
 }

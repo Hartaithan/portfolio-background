@@ -14,6 +14,7 @@ import { Scene } from "./scene";
 import { getRandomNumber } from "./utils";
 import { TextGeometry } from "three/examples/jsm/Addons.js";
 import { Font } from "./font";
+import { Container } from "./container";
 
 const materialParameters: MeshStandardMaterialParameters = {
   color: "#ffffff",
@@ -27,6 +28,7 @@ class Text extends TextGeometry {
     super(text, {
       font: Font.get(),
       size: 2,
+      // TODO: fix height property warning
       height: 0.3,
       curveSegments: 2,
     });
@@ -219,6 +221,7 @@ export class Figure {
   private static zoom: number;
   private static rotation: number;
   private static figure: Mesh;
+  private static isRendered: boolean = false;
 
   constructor() {}
 
@@ -232,6 +235,12 @@ export class Figure {
     Figure.rotation = rotation;
   }
 
+  private static onAfterRender() {
+    if (this.isRendered) return;
+    this.isRendered = true;
+    Container.show();
+  }
+
   public static initialize() {
     const { constructor } = figures[Figure.index];
     const geometry = constructor();
@@ -240,6 +249,7 @@ export class Figure {
     figure.scale.set(Figure.scale, Figure.scale, Figure.scale);
     const scene = Scene.get();
     scene.add(figure);
+    figure.onAfterRender = this.onAfterRender;
     Figure.figure = figure;
     return Figure.figure;
   }
