@@ -7,16 +7,21 @@ import { initializeAnimation } from "./animation";
 import { Font } from "./font";
 
 export const init = async () => {
-  Container.injectStyles();
-  Figure.pick();
-  await Font.load();
-  Scene.create();
-  Camera.create();
-  Renderer.create();
-  Container.setup();
-  Figure.initialize();
-  Renderer.listenOnResize();
-  initializeAnimation();
+  try {
+    Container.injectStyles();
+    Figure.pick();
+    await Font.load();
+    Scene.create();
+    Camera.create();
+    Renderer.create();
+    Container.setup();
+    Figure.initialize();
+    Renderer.listenOnResize();
+    initializeAnimation();
+  } catch (error) {
+    Container.showError();
+    console.error("initialize error", error);
+  }
 };
 
 if (document.readyState === "loading") {

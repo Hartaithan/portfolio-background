@@ -29,6 +29,17 @@ export class Container {
       #background.visible {
         opacity: 1;
       }
+      #background > p {
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 24px;
+        font-weight: 600;
+        color: white;
+      }
+      #background:has(p) {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
     `;
     document.head.appendChild(style);
   }
@@ -41,7 +52,13 @@ export class Container {
   public static setup() {
     const container = Container.get();
     const renderer = Renderer.get();
-    // TODO: fix cannot read properties of undefined (reading 'domElement')
+    if (!renderer) throw new Error("renderer not found");
     container.appendChild(renderer.domElement);
+  }
+
+  public static showError() {
+    const container = Container.get();
+    container.classList.add("visible");
+    container.innerHTML = "<p>Something went wrong :(</p>";
   }
 }
