@@ -28,8 +28,7 @@ class Text extends TextGeometry {
     super(text, {
       font: Font.get(),
       size: 2,
-      // TODO: fix height property warning
-      height: 0.3,
+      depth: 0.3,
       curveSegments: 2,
     });
     this.center();
