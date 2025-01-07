@@ -1,6 +1,7 @@
 import { WebGLRenderer } from "three";
 import { Camera } from "./camera";
-import { Figure } from "./figure";
+import { debounce } from "./utils";
+import { Animation } from "./animation";
 
 export class Renderer {
   private static renderer: WebGLRenderer;
@@ -20,17 +21,23 @@ export class Renderer {
   }
 
   private static handleResize() {
-    const { innerWidth, innerHeight } = window;
     const camera = Camera.get();
-    const changedZoom = innerWidth && innerWidth < 1000 ? Figure.getZoom() : 1;
-    camera.zoom += (changedZoom - camera.zoom) * 0.1;
-    camera.aspect = innerWidth / innerHeight;
+    camera.aspect = window.innerWidth / window.innerHeight;
     camera.updateProjectionMatrix();
-    Renderer.renderer.setSize(innerWidth, innerHeight);
+    Renderer.renderer.setSize(window.innerWidth, window.innerHeight);
+  }
+
+  private static handleDebouncedResize = debounce(() => {
+    Animation.setupZoom();
+  }, 500);
+
+  private static handleResizeEvent() {
+    Renderer.handleResize();
+    Renderer.handleDebouncedResize();
   }
 
   public static listenOnResize() {
-    window.addEventListener("resize", this.handleResize);
-    this.handleResize();
+    window.addEventListener("resize", Renderer.handleResizeEvent);
+    Renderer.handleResizeEvent();
   }
 }

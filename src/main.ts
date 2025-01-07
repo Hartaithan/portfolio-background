@@ -3,8 +3,8 @@ import { Container } from "./container";
 import { Scene } from "./scene";
 import { Camera } from "./camera";
 import { Renderer } from "./renderer";
-import { initializeAnimation } from "./animation";
 import { Font } from "./font";
+import { Animation } from "./animation";
 
 export const init = async () => {
   try {
@@ -17,7 +17,7 @@ export const init = async () => {
     Container.setup();
     Figure.initialize();
     Renderer.listenOnResize();
-    initializeAnimation();
+    Animation.start();
   } catch (error) {
     Container.showError();
     console.error("initialize error", error);
