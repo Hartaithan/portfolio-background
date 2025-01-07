@@ -36,6 +36,7 @@ export class Container {
         color: white;
       }
       #background:has(p) {
+        opacity: 1;
         display: flex;
         justify-content: center;
         align-items: center;
@@ -58,7 +59,6 @@ export class Container {
 
   public static showError() {
     const container = Container.get();
-    container.classList.add("visible");
     container.innerHTML = "<p>Something went wrong :(</p>";
   }
 }
