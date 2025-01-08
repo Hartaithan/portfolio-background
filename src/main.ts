@@ -8,7 +8,8 @@ import { Animation } from "./animation";
 
 export const init = async () => {
   try {
-    Container.injectStyles();
+    Container.styles();
+    Container.create();
     Figure.pick();
     await Font.load();
     Scene.create();
