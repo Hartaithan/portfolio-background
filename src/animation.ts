@@ -3,6 +3,7 @@ import { Renderer } from "./renderer";
 import { Scene } from "./scene";
 import { Camera } from "./camera";
 import { Figure } from "./figure";
+import { debounce } from "./utils";
 
 export class Animation {
   private static clock: Clock;
@@ -29,6 +30,28 @@ export class Animation {
   public static setupZoom() {
     Animation.zoom = Animation.getChangedZoom();
     Animation.changing = true;
+  }
+
+  private static handleResize() {
+    const camera = Camera.get();
+    const renderer = Renderer.get();
+    camera.aspect = window.innerWidth / window.innerHeight;
+    camera.updateProjectionMatrix();
+    renderer.setSize(window.innerWidth, window.innerHeight);
+  }
+
+  private static handleDebouncedResize = debounce(() => {
+    Animation.setupZoom();
+  }, 500);
+
+  private static handleResizeEvent() {
+    Animation.handleResize();
+    Animation.handleDebouncedResize();
+  }
+
+  public static listenOnResize() {
+    window.addEventListener("resize", Animation.handleResizeEvent);
+    Animation.handleResizeEvent();
   }
 
   private static rotateFigure() {

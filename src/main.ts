@@ -16,7 +16,7 @@ export const init = async () => {
     Renderer.create();
     Container.setup();
     Figure.initialize();
-    Renderer.listenOnResize();
+    Animation.listenOnResize();
     Animation.start();
   } catch (error) {
     Container.showError();
