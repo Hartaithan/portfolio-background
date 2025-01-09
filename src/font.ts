@@ -8,10 +8,12 @@ export class Font {
 
   public static async load() {
     if (Figure.getType() !== "text") return;
+    const url = new URL(import.meta.url);
+    const fontPath = new URL("./arial.json", url).href;
     return new Promise<ThreeFont>((resolve, reject) => {
       const loader = new FontLoader();
       loader.load(
-        "arial.json",
+        fontPath,
         (font) => {
           Font.font = font;
           resolve(font);
