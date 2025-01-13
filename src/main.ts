@@ -6,7 +6,7 @@ import { Renderer } from "./renderer";
 import { Font } from "./font";
 import { Animation } from "./animation";
 
-export const init = async () => {
+const init = async () => {
   try {
     Container.styles();
     Container.create();

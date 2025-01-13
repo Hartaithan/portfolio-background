@@ -5,7 +5,7 @@ export default defineConfig({
     lib: {
       entry: "src/main.ts",
       name: "PortfolioBackground",
-      formats: ["es", "umd"],
+      formats: ["iife"],
       fileName: "init",
     },
   },
