@@ -46,8 +46,8 @@ export class Container {
     return Container.container;
   }
 
-  public static show() {
-    const container = Container.get();
+  public static show(element?: HTMLElement) {
+    const container = element || Container.get();
     container.style.opacity = "0";
     container.offsetHeight;
     requestAnimationFrame(() => {
@@ -62,9 +62,9 @@ export class Container {
     container.appendChild(renderer.domElement);
   }
 
-  public static showError() {
+  public static error() {
     const container = Container.get();
-    container.style.opacity = "1";
     container.innerHTML = "<p>Something went wrong :(</p>";
+    Container.show(container);
   }
 }

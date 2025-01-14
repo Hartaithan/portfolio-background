@@ -20,7 +20,7 @@ const init = async () => {
     Animation.listenOnResize();
     Animation.start();
   } catch (error) {
-    Container.showError();
+    Container.error();
     console.error("initialize error", error);
   }
 };
