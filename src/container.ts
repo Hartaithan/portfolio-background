@@ -48,6 +48,8 @@ export class Container {
 
   public static show() {
     const container = Container.get();
+    container.style.opacity = "0";
+    container.offsetHeight;
     requestAnimationFrame(() => {
       container.style.opacity = "1";
     });
