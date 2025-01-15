@@ -7,6 +7,11 @@ npm run build
 touch dist/.nojekyll
 
 git worktree add temp-gh-pages gh-pages
+
+cd temp-gh-pages
+git rm -rf . 
+cd ..
+
 cp -r dist/* temp-gh-pages
 cd temp-gh-pages
 
