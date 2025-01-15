@@ -1,5 +1,6 @@
 import { FontLoader, Font as ThreeFont } from "three/examples/jsm/Addons.js";
 import { Figure } from "./figure";
+import { getFontPath } from "./utils";
 
 export class Font {
   private static font: ThreeFont;
@@ -11,7 +12,7 @@ export class Font {
     return new Promise<ThreeFont>((resolve, reject) => {
       const loader = new FontLoader();
       loader.load(
-        "./arial.json",
+        getFontPath("arial.json"),
         (font) => {
           Font.font = font;
           resolve(font);
