@@ -11,7 +11,15 @@ export const debounce = (callback: (...args: any) => void, wait: number) => {
 };
 
 export const getFontPath = (filename: string) => {
-  const script = (document.currentScript as HTMLScriptElement).src;
-  const directory = script.substring(0, script.lastIndexOf("/") + 1);
+  let src: string = "";
+  if (document.currentScript instanceof HTMLScriptElement) {
+    src = document.currentScript.src;
+  } else {
+    const scripts = Array.from(document.scripts) as HTMLScriptElement[];
+    const script = scripts.find(({ src }) => src.includes("init.iife.js"));
+    if (script) src = script.src;
+  }
+  if (!src) return `./${filename}`;
+  const directory = src.substring(0, src.lastIndexOf("/") + 1);
   return directory + filename;
 };
